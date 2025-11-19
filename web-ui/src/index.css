@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #050607;
+  color: #f4f6fb;
+}
+
+@layer base {
+  *, *::before, *::after {
+    @apply box-border;
+  }
+
+  body {
+    @apply m-0 min-h-screen bg-[#050607] text-[#f4f6fb];
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+
+  code {
+    @apply rounded-md bg-white/10 px-2 py-0.5 text-xs text-white;
+  }
+}

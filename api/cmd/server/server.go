@@ -8,6 +8,7 @@ import (
 	"github.com/go-playground/validator"
 	"github.com/jmoiron/sqlx"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 type ServerConfig struct {
@@ -31,6 +32,24 @@ func (s *Server) Start() (*echo.Echo, error) {
 	e.Validator = &customValidator{
 		validator: validator.New(),
 	}
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{
+			http.MethodGet,
+			http.MethodHead,
+			http.MethodPut,
+			http.MethodPatch,
+			http.MethodPost,
+			http.MethodDelete,
+			http.MethodOptions,
+		},
+		AllowHeaders: []string{
+			echo.HeaderOrigin,
+			echo.HeaderContentType,
+			echo.HeaderAccept,
+			echo.HeaderAuthorization,
+		},
+	}))
 
 	services.LoadServices(e, s.cfg.Db, s.cfg.EmailClient)
 
