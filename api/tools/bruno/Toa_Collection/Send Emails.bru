@@ -1,0 +1,28 @@
+meta {
+  name: Send Emails
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:7432/email
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "destinations": [
+      "rizkyswandy@gmail.com",
+      "abby.kuliah@gmail.com",
+      "ritonga21@gmail"
+    ],
+    "subject": "yo wadapp mwah",
+    "body": "etek etek jua lamang, please reply if u know the answer"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

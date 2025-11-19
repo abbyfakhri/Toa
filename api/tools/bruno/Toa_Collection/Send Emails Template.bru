@@ -1,0 +1,28 @@
+meta {
+  name: Send Emails Template
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:7432/email
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "destinations": [
+      "rizkyswandy@gmail.com",
+      "abby.kuliah@gmail.com",
+      "mraflyritonga@gmail.com"
+    ],
+    "subject": "Kukira Lugu, Ternyata Suhu",
+    "template": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Random Giphy Email</title><style>body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; } table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; } img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; } body { margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif; } .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; } .header { text-align: center; padding-bottom: 20px; color: #333333; } .gif-container { text-align: center; margin-bottom: 20px; } .gif-img { max-width: 100%; height: auto; border-radius: 4px; display: block; margin: 0 auto; } .footer { text-align: center; font-size: 12px; color: #888888; padding-top: 20px; border-top: 1px solid #eeeeee; }</style></head><body><table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\"><tr><td align=\"center\" style=\"padding: 20px 0;\"><div class=\"container\"><div class=\"header\"><h2>Kukira Lugu, Ternyata Suhu</h2></div><div class=\"gif-container\"><img src=\"https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWwxejR5NnQ5eWwxejR5NnQ5/3o7TKSjRrfIPjeiVyM/giphy.gif\" alt=\"Random GIF 1\" class=\"gif-img\"></div><div class=\"gif-container\"><img src=\"https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWwxejR5NnQ5eWwxejR5NnQ5/l0HlHJGHe3yAMhdQY/giphy.gif\" alt=\"Random GIF 2\" class=\"gif-img\"></div><div class=\"footer\"><p>Powered by Giphy</p></div></div></td></tr></table></body></html>"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Toa_Collection",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
