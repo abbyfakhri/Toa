@@ -2,6 +2,7 @@ package email
 
 import (
 	"context"
+	"io"
 
 	"github.com/abbyfakhri/toa-api/internal/models"
 	"github.com/jmoiron/sqlx"
@@ -16,10 +17,12 @@ import (
 
 type EmailHandler interface {
 	PostEmail(e echo.Context) error
+	PostEmailWithCsv(e echo.Context) error
 }
 
 type EmailUsecase interface {
 	SendEmails(ctx context.Context, param models.PostEmailRequest) (batchId string, statusCode int, err error)
+	SendEmailsWithCsv(ctx context.Context, param models.PostEmailRequestCsv, r io.Reader) (batchId string, statusCode int, err error)
 }
 
 type EmailRepository interface {

@@ -27,13 +27,13 @@ func main() {
 		panic(fmt.Sprintf("unable to connect to email client, err: %s", err.Error()))
 	}
 
-	// test(emailClient)
+	//utils.ReadCsv("/Users/abbyfc/Desktop/myCodes/personal_projects/toa/api/cmd/test_source.csv")
 
 	defer emailClient.Quit()
 
 	server := server.NewServer(server.ServerConfig{
-		Port: os.Getenv("PORT"),
-		Db: nil,
+		Port:        os.Getenv("PORT"),
+		Db:          nil,
 		EmailClient: emailClient,
 	})
 

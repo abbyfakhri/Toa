@@ -27,10 +27,17 @@ type GetEmailRequest struct {
 }
 
 type PostEmailRequest struct {
-	Destinations []string `json:"destinations"`
-	Subject      string   `json:"subject"`
+	Destinations []string `json:"destinations" validate:"required"`
+	Subject      string   `json:"subject" validate:"required"`
 	Body         string   `json:"body"`
 	Template     string   `json:"template"`
+}
+
+type PostEmailRequestCsv struct {
+	Subject      string `form:"subject" validate:"required"`
+	Body         string `form:"body"`
+	Template     string `form:"template"`
+	TargetColumn string `form:"targetColumn" validate:"required"`
 }
 
 type PostEmailResponse struct {

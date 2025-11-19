@@ -1,0 +1,158 @@
+meta {
+  name: Send Emails With CSV
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:7432/email/csv
+  body: multipartForm
+  auth: inherit
+}
+
+body:json {
+  {
+    "destinations": [
+      "rizkyswandy@gmail.com",
+      "abby.kuliah@gmail.com",
+      "ritonga21@gmail"
+    ],
+    "subject": "yo wadapp mwah",
+    "body": "etek etek jua lamang, please reply if u know the answer"
+  }
+}
+
+body:form-urlencoded {
+  : 
+}
+
+body:multipart-form {
+  subject: Pemuda Gaji Tanggung
+  body: pesan ini disampaikan kepada pemuda gaji tanggung
+  targetColumn: email
+  data: @file(/Users/abbyfc/Downloads/test_source.csv) @contentType(text/csv)
+  template: '''
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Yo Mama Jokes</title>
+        <style>
+            /* Reset styles */
+            body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+            img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
+            
+            /* Main Layout */
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #1a1a1d; /* Dark mode background */
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                color: #ffffff;
+            }
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                background-color: #2d2d30;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            }
+            
+            /* Sections */
+            .header {
+                background-color: #ff4757;
+                padding: 30px 20px;
+                text-align: center;
+            }
+            .header h1 {
+                margin: 0;
+                font-size: 28px;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                color: #ffffff;
+            }
+            .content {
+                padding: 30px;
+            }
+            .joke-card {
+                background-color: #3e3e42;
+                border-radius: 8px;
+                padding: 20px;
+                margin-bottom: 25px;
+                border-left: 5px solid #ff4757;
+            }
+            .joke-text {
+                font-size: 18px;
+                line-height: 1.5;
+                margin: 0 0 15px 0;
+                font-weight: bold;
+            }
+            .gif-img {
+                width: 100%;
+                max-width: 100%;
+                border-radius: 4px;
+                display: block;
+            }
+            .footer {
+                text-align: center;
+                padding: 20px;
+                font-size: 12px;
+                color: #888888;
+                background-color: #252528;
+            }
+        </style>
+    </head>
+    <body>
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td align="center" style="padding: 20px 0;">
+                    <div class="container">
+                        
+                        <div class="header">
+                            <h1>Yo Mama Special</h1>
+                        </div>
+    
+                        <div class="content">
+                            
+                            <div class="joke-card">
+                                <p class="joke-text">
+                                    "Yo mama is so old, she knew Burger King while he was still a Prince."
+                                </p>
+                                <img src="https://media.giphy.com/media/TGi1zmIHpDRsrqlqP4/giphy.gif" alt="Funny GIF" class="gif-img">
+                            </div>
+    
+                            <div class="joke-card">
+                                <p class="joke-text">
+                                    "Yo mama is so clumsy, she tripped over a cordless phone."
+                                </p>
+                                <img src="https://media.giphy.com/media/3o6Zjp2pI7YdD6G6eQ/giphy.gif" alt="Funny GIF" class="gif-img">
+                            </div>
+    
+                            <div class="joke-card">
+                                <p class="joke-text">
+                                    "Yo mama is so scary, the government moved Halloween to her birthday."
+                                </p>
+                                <img src="https://media.giphy.com/media/14ut8PhnIwzros/giphy.gif" alt="Funny GIF" class="gif-img">
+                            </div>
+    
+                        </div>
+    
+                        <div class="footer">
+                            <p>Don't take it personally, it's just an email template.</p>
+                        </div>
+    
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </body>
+    </html>
+  '''
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

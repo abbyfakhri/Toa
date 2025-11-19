@@ -11,6 +11,56 @@ type Handler struct {
 	usecase EmailUsecase
 }
 
+// PostEmailWithCsv implements EmailHandler.
+func (h Handler) PostEmailWithCsv(e echo.Context) error {
+	var request models.PostEmailRequestCsv
+
+	// bind request
+	if err := e.Bind(&request); err != nil {
+		return e.JSON(http.StatusBadRequest, map[string]string{
+			"error": err.Error(),
+		})
+	}
+
+	// get file
+	file, err := e.FormFile("data")
+	if err != nil {
+		return e.JSON(http.StatusBadRequest, map[string]string{
+			"error": err.Error(),
+		})
+	}
+
+	src, err := file.Open()
+	if err != nil {
+		return e.JSON(http.StatusBadRequest, map[string]string{
+			"error": err.Error(),
+		})
+	}
+	defer src.Close()
+
+	// validate request
+	if err := e.Validate(&request); err != nil {
+		return e.JSON(http.StatusBadRequest, map[string]string{
+			"error": err.Error(),
+		})
+	}
+
+	// call usecase
+	batchId, statusCode, err := h.usecase.SendEmailsWithCsv(e.Request().Context(), request, src)
+	if err != nil {
+		return e.JSON(statusCode, map[string]string{
+			"error": err.Error(),
+		})
+	}
+
+	// return response
+	return e.JSON(http.StatusAccepted, map[string]any{
+		"data": map[string]string{
+			"batchId": batchId,
+		},
+	})
+}
+
 // PostEmail implements EmailHandler.
 func (h Handler) PostEmail(e echo.Context) error {
 	var request models.PostEmailRequest
